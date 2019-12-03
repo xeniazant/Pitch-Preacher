@@ -1,13 +1,18 @@
 package com.xeniaz.pitchpreacher;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import be.tarsos.dsp.AudioDispatcher;
 import be.tarsos.dsp.AudioEvent;
@@ -32,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 permissionToRecordAccepted  = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                 break;
         }
-        if (!permissionToRecordAccepted ) finish();
+        if (!permissionToRecordAccepted) finish();
 
     }
 
@@ -43,19 +48,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
+
 
 
         final TextView hzDisplay =findViewById(R.id.hzdisplayer);
-        //Button startStop = findViewById(R.id.startStop);
+        Button toView = findViewById(R.id.toView);
 
-//        startStop.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//            }
-//        });
+        toView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+                    openActivity();
+                }
+            }
+        });
 
         AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
         dispatcher.addAudioProcessor(new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, new PitchDetectionHandler() {
@@ -67,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        hzDisplay.setText("Pitch in Hertz: " + pitchInHz);
+                        hzDisplay.setText("Initial activity Pitch in Hertz: " + pitchInHz);
                     }
                 });
 
@@ -75,8 +81,23 @@ public class MainActivity extends AppCompatActivity {
         }));
         new Thread(dispatcher,"Audio Dispatcher").start();
 
-        //hzDisplay.setText("Is this working?");
+
        }
+
+       public void openActivity(){
+           if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+               ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 200);
+               Toast toast = Toast.makeText(this, "test", Toast.LENGTH_LONG);
+               toast.show();
+               Intent intent = new Intent(this, pitch.class);
+               startActivity(intent);
+           }
+           //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 200);
+
+
+       }
+
+
     }
 
 
