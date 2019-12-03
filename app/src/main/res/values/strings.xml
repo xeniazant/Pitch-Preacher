@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Pitch Preacher</string>
+    <string name="settings_top">This view will have several settings for the user to choose from!</string>
 </resources>
