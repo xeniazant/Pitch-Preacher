@@ -59,7 +59,7 @@ public class pitch extends AppCompatActivity {
                         @Override
                         public void run() {
 
-                            hzDisplay.setText("Pitch in Hertz: " + pitchInHz);
+                            hzDisplay.setText("Second activity Pitch in Hertz: " + pitchInHz);
                         }
                     });
 
