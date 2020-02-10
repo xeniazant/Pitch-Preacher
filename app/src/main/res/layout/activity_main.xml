@@ -20,10 +20,22 @@
         android:id="@+id/toView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="I'm Done"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hzdisplayer"
         app:layout_constraintVertical_bias="0.120000005" />
+
+    <TextView
+        android:id="@+id/singDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="please sing down to your lowest pitch"
+        app:layout_constraintBottom_toTopOf="@+id/hzdisplayer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

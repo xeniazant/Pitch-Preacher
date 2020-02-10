@@ -2,6 +2,7 @@ package com.xeniaz.pitchpreacher;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
     private boolean permissionToRecordAccepted = false;
     private String [] permissions = {Manifest.permission.RECORD_AUDIO};
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private int buttonCheck = 0;
+    float currentLow;
+    float currentHigh;
+    //TODO: describe what this variable does.
+    private boolean shouldSetbasepitch = true;
+
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -58,15 +67,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+                    //openActivity();
+
+                }
+                buttonCheck += 1;
+                if(buttonCheck >= 2){
+                    // Storing the highest and lowest notes in a users range (initially)
+                    //in shared preferences vey-value pairs.
+                    // Storing data into SharedPreferences
+                    SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+
+                    // Creating an Editor object
+                        // to edit(write to the file)
+                    SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                    myEdit.putFloat("lowestNote", currentLow);
+                    myEdit.putFloat("highestNote", currentHigh);
+                    myEdit.apply();
+
                     openActivity();
                 }
             }
         });
 
+
+
+
         AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
         dispatcher.addAudioProcessor(new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, new PitchDetectionHandler() {
             @Override
-            public void handlePitch(PitchDetectionResult pitchDetectionResult,
+            public void handlePitch(final PitchDetectionResult pitchDetectionResult,
                                     AudioEvent audioEvent) {
                 final float pitchInHz = pitchDetectionResult.getPitch();
                 runOnUiThread(new Runnable() {
@@ -74,6 +103,26 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
 
                         hzDisplay.setText("Initial activity Pitch in Hertz: " + pitchInHz);
+
+
+                        //This ensures we only set the current high and low value arbitrarily ONCE
+                        if(shouldSetbasepitch && (pitchInHz > 98)){
+                            currentLow = pitchDetectionResult.getPitch();
+                            currentHigh = pitchDetectionResult.getPitch();
+
+                            shouldSetbasepitch = false;
+                        }
+
+
+
+                            if((currentLow > pitchDetectionResult.getPitch()) && (pitchDetectionResult.getPitch() > 98)){
+                                currentLow = pitchDetectionResult.getPitch();
+                            }
+                            else if(currentHigh < pitchDetectionResult.getPitch()){
+                                currentHigh = pitchDetectionResult.getPitch();
+                            }
+
+
                     }
                 });
 
@@ -82,12 +131,21 @@ public class MainActivity extends AppCompatActivity {
         new Thread(dispatcher,"Audio Dispatcher").start();
 
 
+
+
        }
 
        public void openActivity(){
            if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 200);
-               Toast toast = Toast.makeText(this, "test", Toast.LENGTH_LONG);
+
+
+               SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_APPEND);
+               float lowPref = sh.getFloat("lowestNote", (float) 0.0);
+               float highPref = sh.getFloat("highestNote", (float) 0.0);
+
+
+               Toast toast = Toast.makeText(this, "initial low:" + lowPref + "initial high: " + highPref, Toast.LENGTH_LONG);
                toast.show();
                Intent intent = new Intent(this, pitch.class);
                startActivity(intent);
