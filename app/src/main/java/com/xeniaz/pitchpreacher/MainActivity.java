@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView hzDisplay =findViewById(R.id.hzdisplayer);
         Button toView = findViewById(R.id.toView);
+        final TextView instructionsText = findViewById(R.id.singDown);
 
         toView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 buttonCheck += 1;
+
+                if(buttonCheck == 1){
+                    instructionsText.setText("Now Sing up to your highest note, click the button below when you're finished.");
+                }
+
                 if(buttonCheck >= 2){
                     // Storing the highest and lowest notes in a users range (initially)
                     //in shared preferences vey-value pairs.

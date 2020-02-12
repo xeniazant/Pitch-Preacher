@@ -29,9 +29,9 @@
 
     <TextView
         android:id="@+id/singDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="please sing down to your lowest pitch"
+        android:layout_width="243dp"
+        android:layout_height="67dp"
+        android:text="Please sing down to your lowest pitch"
         app:layout_constraintBottom_toTopOf="@+id/hzdisplayer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
