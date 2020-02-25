@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -38,25 +37,79 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
+
+
+    //TODO: give credit for https://developer.android.com/training/permissions/requesting#java
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
-            case REQUEST_RECORD_AUDIO_PERMISSION:
-                permissionToRecordAccepted  = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                break;
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_RECORD_AUDIO_PERMISSION:{
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
         }
-        if (!permissionToRecordAccepted) finish();
-
     }
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.RECORD_AUDIO)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.RECORD_AUDIO},
+                        REQUEST_RECORD_AUDIO_PERMISSION);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+            // Permission has already been granted
+            SharedPreferences sh = getSharedPreferences( "MySharedPref", MODE_PRIVATE);
+            boolean shouldSkip = sh.getBoolean("shouldSkip", true);
+
+
+            if(shouldSkip){
+                skip();
+            }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -88,36 +141,40 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences.Editor myEdit = sharedPreferences.edit();
                     myEdit.putFloat("lowestNote", currentLow);
                     myEdit.putFloat("highestNote", currentHigh);
+                    myEdit.putBoolean("shouldSkip", true);
                     myEdit.apply();
 
                     openActivity();
                 }
+
+
+
             }
         });
 
 
 
+        //TODO: be a good  programmer and write comments here
+            AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
+            dispatcher.addAudioProcessor(new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, new PitchDetectionHandler() {
+                @Override
+                public void handlePitch(final PitchDetectionResult pitchDetectionResult,
+                                        AudioEvent audioEvent) {
+                    final float pitchInHz = pitchDetectionResult.getPitch();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
 
-        AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
-        dispatcher.addAudioProcessor(new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, new PitchDetectionHandler() {
-            @Override
-            public void handlePitch(final PitchDetectionResult pitchDetectionResult,
-                                    AudioEvent audioEvent) {
-                final float pitchInHz = pitchDetectionResult.getPitch();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        hzDisplay.setText("Initial activity Pitch in Hertz: " + pitchInHz);
+                            hzDisplay.setText("Initial activity Pitch in Hertz: " + pitchInHz);
 
 
-                        //This ensures we only set the current high and low value arbitrarily ONCE
-                        if(shouldSetbasepitch && (pitchInHz > 98)){
-                            currentLow = pitchDetectionResult.getPitch();
-                            currentHigh = pitchDetectionResult.getPitch();
+                            //This ensures we only set the current high and low value arbitrarily ONCE
+                            if(shouldSetbasepitch && (pitchInHz > 98)){
+                                currentLow = pitchDetectionResult.getPitch();
+                                currentHigh = pitchDetectionResult.getPitch();
 
-                            shouldSetbasepitch = false;
-                        }
+                                shouldSetbasepitch = false;
+                            }
 
 
 
@@ -129,37 +186,52 @@ public class MainActivity extends AppCompatActivity {
                             }
 
 
-                    }
-                });
+                        }
+                    });
 
-            }
-        }));
-        new Thread(dispatcher,"Audio Dispatcher").start();
+                }
+            }));
+            new Thread(dispatcher,"Audio Dispatcher").start();
+        }
+
+
 
 
 
 
        }
 
+
+       // A function that opens the selector activity the first
        public void openActivity(){
            if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 200);
 
 
-               SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_APPEND);
+               SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
                float lowPref = sh.getFloat("lowestNote", (float) 0.0);
                float highPref = sh.getFloat("highestNote", (float) 0.0);
 
 
+
                Toast toast = Toast.makeText(this, "initial low:" + lowPref + "initial high: " + highPref, Toast.LENGTH_LONG);
                toast.show();
-               Intent intent = new Intent(this, pitch.class);
+               Intent intent = new Intent(this, selector.class);
                startActivity(intent);
            }
+
+
+
            //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 200);
 
 
        }
+        // Function that will skip this activity after first run
+        private void skip(){
+            Intent intent = new Intent(this, selector.class);
+            startActivity(intent);
+
+        }
 
 
     }
