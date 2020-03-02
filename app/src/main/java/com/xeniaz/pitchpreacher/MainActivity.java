@@ -39,6 +39,180 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO: Write documentation
     public String hzToNote(float f){
+        if( (float)79.96 < f && f < (float)84.715){
+            return "E2";
+        }
+
+        if(  (float)84.715 < f && f < (float)89.75 ){
+            return "F2";
+        }
+
+        if(  (float)89.75 < f && f < (float)95.085 ){
+            return "F#2";
+        }
+        if(  (float)95.085 < f && f < (float)100.745 ){
+            return "G2";
+        }
+        if(  (float)100.745 < f && f < (float)106.73 ){
+            return "G#2";
+        }
+        if(  (float)106.73 < f && f < (float)113.075 ){
+            return "A2";
+        }
+        if(  (float)113.075 < f && f < (float)119.8 ){
+            return "A#2";
+        }
+        if(  (float)119.8 < f && f < (float)126.92 ){
+            return "B2";
+        }
+        if(  (float)126.92 < f && f < (float)134.47 ){
+            return "C3";
+        }
+        if(  (float)134.47 < f && f < (float)142.465 ){
+            return "C#3";
+        }
+        if(  (float)142.465 < f && f < (float)150.935){
+            return "D3";
+        }
+        if(  (float)150.935 < f && f < (float)159.91 ){
+            return "D#3";
+        }
+        if(  (float)159.91 < f && f < (float)169.415 ){
+            return "E3";
+        }
+        if(  (float)169.415 < f && f < (float)179.5){
+            return "F3";
+        }
+        if(  (float)179.5 < f && f < (float)190.175 ){
+            return "F#3";
+        }
+        if(  (float)190.175 < f && f < (float)201.475 ){
+            return "G3";
+        }
+        if(  (float)201.475 < f && f < (float)213.46){
+            return "G#3";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "A3";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "A#3";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "B3";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "C4";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "C#4";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "D4";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "D#4";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "E4";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "F4";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "F#4";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "G4";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "G#4";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "A4";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "A#4";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "B4";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "C5";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "C#5";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "D5";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "D#5";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "E5";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "F5";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "F#5";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "G5";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "G#5";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "A5";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "A#5";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "B5";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "C6";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "C#6";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "D6";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "D#6";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "E6";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "F6";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "F#6";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "G6";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "G#6";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "A6";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "A#6";
+        }
+        if(  (float)val < f && f < (float)val ){
+            return "B6";
+        }
+
+
+
+
         return "Nothing yet";
     }
 
