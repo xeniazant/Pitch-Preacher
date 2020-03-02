@@ -92,128 +92,124 @@ public class MainActivity extends AppCompatActivity {
         if(  (float)201.475 < f && f < (float)213.46){
             return "G#3";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)213.46 < f && f < (float)226.15 ){
             return "A3";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)226.15 < f && f < (float)239.595 ){
             return "A#3";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)239.595 < f && f < (float)253.855 ){
             return "B3";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)253.855 < f && f < (float)268.94 ){
             return "C4";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)268.94 < f && f < (float)284.925 ){
             return "C#4";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)284.925 < f && f < (float)301.88 ){
             return "D4";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)301.88 < f && f < (float)319.83 ){
             return "D#4";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)319.83 < f && f < (float)338.85 ){
             return "E4";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)338.85 < f && f < (float)358.985 ){
             return "F4";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)358.985 < f && f < (float)380.35 ){
             return "F#4";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)380.35 < f && f < (float)402.95 ){
             return "G4";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)402.95 < f && f < (float)426.92 ){
             return "G#4";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)426.92 < f && f < (float)452.3 ){
             return "A4";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)452.3 < f && f < (float)479.195 ){
             return "A#4";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)479.195 < f && f < (float)507.69 ){
             return "B4";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)507.69 < f && f < (float)537.89 ){
             return "C5";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)537.89 < f && f < (float)569.87 ){
             return "C#5";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)569.87 < f && f < (float)603.75 ){
             return "D5";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)603.75 < f && f < (float)639.645 ){
             return "D#5";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)639.645 < f && f < (float)677.695 ){
             return "E5";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)677.695 < f && f < (float)717.99 ){
             return "F5";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)717.99 < f && f < (float)760.68 ){
             return "F#5";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)760.68 < f && f < (float)805.915 ){
             return "G5";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)805.915 < f && f < (float)853.835 ){
             return "G#5";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)853.835 < f && f < (float)904.61 ){
             return "A5";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)904.61 < f && f < (float)958.405 ){
             return "A#5";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)958.405 < f && f < (float)1015.385 ){
             return "B5";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)1015.385 < f && f < (float)1075.765 ){
             return "C6";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)1075.765 < f && f < (float)1139.735 ){
             return "C#6";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)1139.735 < f && f < (float)1207.51 ){
             return "D6";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)1207.51 < f && f < (float)1279.31 ){
             return "D#6";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)1279.31 < f && f < (float)1355.375 ){
             return "E6";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)1355.375 < f && f < (float)1435.98 ){
             return "F6";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)1435.98 < f && f < (float)1521.36 ){
             return "F#6";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)1521.36 < f && f < (float)1611.83 ){
             return "G6";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)1611.83 < f && f < (float)1707.67 ){
             return "G#6";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)1707.67 < f && f < (float)1809.225 ){
             return "A6";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)1809.225 < f && f < (float)1920.095 ){
             return "A#6";
         }
-        if(  (float)val < f && f < (float)val ){
+        if(  (float)1920.095 < f && f < (float)2020 ){
             return "B6";
         }
-
-
-
-
-        return "Nothing yet";
+        return "No note heard";
     }
 
 
