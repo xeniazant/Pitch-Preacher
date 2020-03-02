@@ -14,9 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+        <activity android:name=".SettingsActivity"/>
         <activity android:name=".pitch" />
         <activity android:name=".range" />
         <activity android:name=".selector" />

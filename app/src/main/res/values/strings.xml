@@ -2,10 +2,14 @@
     <string name="app_name">Pitch Preacher</string>
     <string name="settings_top">This view will have several settings for the user to choose from!</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="tone_settings_summary">Choose how the notes this app produces will sound</string>
+    <string name="pitch_trainer_settings_summary">Choose how the pitch trainer behaves</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
+    <string name="pitch_trainer_settings_header">Pitch Trainer Behavior</string>
+    <string name="generated_tones_header">Tone Selection</string>
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>

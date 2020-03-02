@@ -9,4 +9,22 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+    <string-array name="pitch_settings_entries">
+    <item>Mode1</item>
+    <item>Mode2</item>
+    <item>Mode1 +mode2</item>
+    </string-array>
+
+    <string-array name="pitch_settings_values">
+        <item>Mode1</item>
+        <item>Mode2</item>
+        <item>Mode1 +mode2</item>
+    </string-array>
+
+    <string-array name="tones_settings_values">
+        <item>Piano Notes</item>
+        <item>Violin Notes</item>
+        <item>Synth Notes</item>
+    </string-array>
 </resources>

@@ -37,8 +37,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
+    //TODO: Write documentation
+    public String hzToNote(float f){
+        return "Nothing yet";
+    }
 
 
     //TODO: give credit for https://developer.android.com/training/permissions/requesting#java
